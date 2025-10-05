@@ -11,12 +11,15 @@ export default function FileManager() {
   });
   const [activeTab, setActiveTab] = useState("daily");
 
+  // 🔹 Use environment variable for API URL
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
     if (!authToken) return; // Ensure token exists before fetching
 
     const fetchLeaderboard = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/leaderboard", {
+        const res = await fetch(`${API_BASE_URL}/leaderboard`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -30,7 +33,7 @@ export default function FileManager() {
       }
     };
     fetchLeaderboard();
-  }, [authToken]); // Only run when authToken changes
+  }, [authToken, API_BASE_URL]); // Added API_BASE_URL dependency
 
   return (
     <div className="leaderboard-container">

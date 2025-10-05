@@ -9,13 +9,16 @@ export default function User({ refreshHistoryFlag }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // 🔹 Use environment variable for API URL
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
     const fetchHistory = async () => {
       if (!authToken) return;
 
       setLoading(true);
       try {
-        const res = await fetch("http://localhost:5000/api/spin/history", {
+        const res = await fetch(`${API_BASE_URL}/spin/history`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -34,7 +37,7 @@ export default function User({ refreshHistoryFlag }) {
     };
 
     fetchHistory();
-  }, [authToken, refreshHistoryFlag]); // 🔹 Refresh when flag changes
+  }, [authToken, refreshHistoryFlag, API_BASE_URL]); // API_BASE_URL dependency added
 
   if (loading) return <p style={{ textAlign: "center", color: "#ccc" }}>Loading...</p>;
   if (error) return <p style={{ textAlign: "center", color: "red" }}>{error}</p>;

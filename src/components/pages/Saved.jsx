@@ -8,9 +8,12 @@ export default function Saved() {
   const [input, setInput] = useState("");
   const chatEndRef = useRef(null);
 
+  // 🔹 Use environment variable for API URL
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const fetchChat = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/chat", {
+      const res = await fetch(`${API_BASE_URL}/chat`, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       const data = await res.json();
@@ -28,7 +31,7 @@ export default function Saved() {
   const sendMessage = async () => {
     if (!input.trim()) return;
     try {
-      const res = await fetch("http://localhost:5000/api/chat", {
+      const res = await fetch(`${API_BASE_URL}/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +53,7 @@ export default function Saved() {
     if (authToken) {
       fetchChat();
     }
-  }, [authToken]);
+  }, [authToken, API_BASE_URL]); // Added API_BASE_URL dependency
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });

@@ -22,10 +22,13 @@ export default function Setting() {
     walletBalance: 0,
   });
 
+  // 🔹 Environment variable for API base URL
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const resUser = await fetch("http://localhost:5000/api/auth/getuser", {
+        const resUser = await fetch(`${API_BASE_URL}/auth/getuser`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -38,7 +41,7 @@ export default function Setting() {
         if (userDataRes.success && userDataRes.user) {
           const { name, email, mobile, vipLevel } = userDataRes.user;
 
-          const resWallet = await fetch("http://localhost:5000/api/wallet/balance", {
+          const resWallet = await fetch(`${API_BASE_URL}/wallet/balance`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -62,7 +65,7 @@ export default function Setting() {
     };
 
     fetchUserData();
-  }, [authToken]);
+  }, [authToken, API_BASE_URL]);
 
   const showCustomMessage = (msg, type) => {
     setMessage(msg);
@@ -82,7 +85,7 @@ export default function Setting() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/changepassword", {
+      const res = await fetch(`${API_BASE_URL}/auth/changepassword`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -108,8 +111,6 @@ export default function Setting() {
 
   return (
     <div className="profile-container">
-      
-      {/* ✅ Custom message on top with z-index */}
       {message && (
         <div className={`custom-message ${messageType}`}>
           {message}
