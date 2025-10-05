@@ -1,0 +1,86 @@
+.win-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.win-popup {
+  background: radial-gradient(circle, #1a1a1a, #000);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  width: 90%;
+  max-width: 350px;
+  box-shadow: 0px 0px 25px rgba(255, 215, 0, 0.7);
+  animation: popupScale 0.3s ease-in-out;
+  box-sizing: border-box;
+}
+
+.win-popup h1 {
+  color: gold;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 5px red;
+}
+
+.win-popup .multiplier {
+  color: #fff;
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.win-popup .multiplier span {
+  font-weight: bold;
+  color: gold;
+  font-size: 1.4rem;
+}
+
+.win-popup .amount {
+  color: #4caf50;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.win-popup-btn {
+  background: linear-gradient(45deg, gold, orange);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  animation: pulse 1s infinite;
+  width: 80%;
+  max-width: 200px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popupScale {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@media (max-width: 400px) {
+  .win-popup h1 { font-size: 1.3rem; }
+  .win-popup .multiplier { font-size: 1rem; }
+  .win-popup .amount { font-size: 1.1rem; }
+}

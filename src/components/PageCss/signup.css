@@ -1,0 +1,97 @@
+/* src/components/PageCss/signup.css */
+
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: radial-gradient(circle at center, #1b1b2f, #000);
+  font-family: "Arial Black", sans-serif;
+}
+
+.signup-card {
+  background: linear-gradient(145deg, #2a2a40, #1b1b2f);
+  border-radius: 15px;
+  padding: 40px;
+  width: 380px;
+  box-shadow: 0px 0px 20px rgba(255, 215, 0, 0.7);
+  text-align: center;
+}
+
+.signup-title {
+  font-size: 28px;
+  color: gold;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 5px black;
+}
+
+.signup-subtitle {
+  font-size: 14px;
+  color: white;
+  margin-bottom: 25px;
+}
+
+.signup-form input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.signup-form input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.signup-btn {
+  width: 100%;
+  padding: 12px;
+  background: gold;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.signup-btn:hover {
+  background: darkgoldenrod;
+  transform: scale(1.05);
+}
+
+.signup-footer {
+  margin-top: 20px;
+  color: white;
+  font-size: 14px;
+}
+
+.signup-footer .login-link {
+  color: gold;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.signup-footer .login-link:hover {
+  color: orange;
+}
+
+
+.gender-select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.gender-select option {
+  color: black;
+}

@@ -1,0 +1,142 @@
+/* 🔥 Gambling-style History Page CSS */
+
+/* Main title wrapper */
+.title {
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  color: white;
+  background: linear-gradient(135deg, #0d0d2b, #1a1a3f);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 0;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden; /* Prevent page scroll */
+}
+
+/* Center content wrapper */
+.title .centerContent {
+  width: 95%;
+  max-width: 1200px;
+  height: 90vh; /* Fixed content height */
+  background: linear-gradient(145deg, rgba(10, 10, 40, 0.9), rgba(20, 20, 60, 0.95));
+  border-radius: 15px;
+  padding: 20px; /* Adjusted padding for perfect sticky header */
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Page heading */
+.pageHeading {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #00e5ff;
+  text-shadow: 0px 0px 10px #00e5ff, 0px 0px 20px #00bcd4;
+}
+
+/* Content box (card) */
+.contentBox {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 0; /* Remove padding to align header perfectly */
+  flex: 1; /* Fill available height */
+  overflow-y: auto; /* Only table content scrolls */
+  overflow-x: auto;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Table style */
+.spinTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0; /* Remove margin to fix header alignment */
+  font-size: 15px;
+  table-layout: fixed;
+}
+
+/* Fixed header */
+.spinTable thead th {
+  position: sticky;
+  top: 0; /* Stick to top of scrolling container */
+  background: linear-gradient(90deg, #00bcd4, #00e5ff);
+  z-index: 10;
+}
+
+/* Table header and cell styling */
+.spinTable th,
+.spinTable td {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px;
+  text-align: center;
+  color: white;
+}
+
+.spinTable th {
+  background: linear-gradient(90deg, #00bcd4, #00e5ff);
+  color: #000;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Even row background */
+.spinTable tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Hover effect for rows */
+.spinTable tr:hover {
+  background: rgba(0, 255, 255, 0.1);
+  transition: 0.3s;
+}
+
+/* Status styling */
+.win {
+  color: #00ff72;
+  font-weight: bold;
+  text-shadow: 0px 0px 5px #00ff72;
+}
+
+.lose {
+  color: #ff4d4d;
+  font-weight: bold;
+  text-shadow: 0px 0px 5px #ff4d4d;
+}
+
+/* Table header hover glow */
+.spinTable th:hover {
+  background: linear-gradient(90deg, #00e5ff, #00bcd4);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+  .spinTable th,
+  .spinTable td {
+    padding: 8px;
+    font-size: 13px;
+  }
+}
+
+/* Glowing effect for heading */
+.pageHeading::after {
+  content: "";
+  display: block;
+  margin: 8px auto;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #00e5ff, #00bcd4);
+  border-radius: 2px;
+}
+
+/* Footer credit (optional) */
+.contentBox p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  margin-top: 20px;
+}

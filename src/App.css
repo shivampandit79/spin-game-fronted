@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'MyFont';
+  src: url('./assets/fonts/MyFont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'MyFont', sans-serif;
+}
+
+.main-container{
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar {
+  background: rgb(0, 7, 61);
+  color: white;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow: auto;           /* ya overflow-y: auto; */
+  -ms-overflow-style: none;    /* IE/old Edge */
+  scrollbar-width: none;
+  border: 1px solid white;
+  box-shadow: 2px 2px 8px rgba(216, 60, 60, 0.3);
+
+}
+
+.content {
+  flex: 1;          /* Sidebar ke baad bachi hui sari jagah le lega */
+  height: 100vh;
+  overflow-y: auto;
+}
+
+
+
+.sidebar::-webkit-scrollbar {
+  display: none;               /* Chrome, Safari */
+}
+
+.routes{
+  color: white;
+}
+
+.top_section{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 10px;
+}
+
+.logo{
+  font-size: 14px;
+  top: 0;
+}
+
+
+.search{
+  display: flex;
+  align-items: center;
+  margin-top: 10px 0;
+  height: 40px;
+  padding: 10px;
+}
+
+
+.search input{
+  border: none;
+  margin-left: 5px;
+  border-radius: 5px;
+  align-items: center;
+  text-align: center;
+  color: black;
+  background: white;
+}
+
+.link{
+  display: flex;
+  columns: white  ;
+  gap: 3px;
+  padding: 5px 10px;
+  border-right: 4px solid transparent;
+  transition: 0.2s cubic-bezier(0.6,-0.28, 0.735, 0.045);
+}
+
+.link:hover{
+  border-right: 4px solid white;
+  transition: 0.2s cubic-bezier(0.6,-0.28, 0.735, 0.045);
+  background: rgb(45, 51, 89);
+}
+
+.link_text{
+  white-space: nowrap;
+  font-size: 15px;
+}
+

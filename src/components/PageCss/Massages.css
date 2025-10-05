@@ -1,0 +1,164 @@
+.titlee{
+    display: flex;
+    background: rgb(1, 5, 31);
+    width: 100%;
+    height: 100%;
+}
+
+
+.center-div{
+    width: 90%;
+    height: 90vh;
+    margin: 0 auto;
+    background: #030241;
+    margin-top: 30px;
+    border-radius: 5px;
+    border-radius: 15px;
+}
+
+.top-containt{
+    align-items: center;
+    text-align: center;
+    padding: 5px 15px;
+}
+
+
+.sub-span{
+    font-size: 20px;
+    background: rgb(27, 25, 3);
+    padding: 10px 12px;
+    border-radius: 15px;
+    color: gold;
+}
+
+.top-div{
+    height: 100px;
+    width: 95%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+.top-div img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin-top: 10px;
+}
+
+.user-details{
+    height: 80%;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user-details :nth-child(1){
+    width: 180px;
+    font-size: 26px;
+    font-weight: 700;
+    color: gold;
+    margin-left: 0px;
+}
+
+.user-details :nth-child(2){
+    font-size: 32px;
+    font-weight: 400;
+    color: gold;
+}
+
+/* .user-details :nth-child(3){
+    font-size: 18px;
+    font-weight: 400;
+    color: gold;
+    background: grey;
+    margin: 5px;
+    border-radius: 15px;
+    padding: 5px 15px;
+} */
+
+
+.deposit-withdraw {
+      display: grid;
+      margin-top: 25px;
+      grid-template-columns: 1fr 1fr; /* 2 equal grids */
+      gap: 10px; /* dono ke beech space */
+      width: 100%; /* full width */
+    }
+
+    .box {
+      background: lightblue;
+      text-align: center;
+      padding: 20px;
+      font-size: 20px;
+      border-radius: 8px;
+    }
+
+    .disposit{
+        background: green;
+        font-size: 22px;
+        font-weight: 400;
+    }
+
+
+    .withdraw{
+        background: rgb(172, 70, 70);
+        font-size: 22px;
+        font-weight: 400;
+    }
+
+    .show-cong-msg{
+        background: white;
+        padding: 5px 10px;
+        margin-top: 10px;
+        border-radius: 10px;
+        display: flex;
+        background: rgb(5, 2, 36);
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .show-cong-msg :nth-child(1){
+        font-size: 28px;
+        color: gold;
+        font-weight: 600;
+    }
+
+    .show-cong-msg :nth-child(2){
+        font-size: 16px;
+        font-weight: 500;
+        color: gold;
+        margin-left: 5px;
+    }
+
+    .show-transection-data{
+        display: flex;
+        width: 99%;
+        flex-direction: column;
+        margin-top: 15px;
+    }
+
+    .show-transection-data .history-title{
+        color: white;
+        font-size: 20px;
+        margin-left: 10px;
+        font-weight: 300;
+    }
+
+    .transacton-data{
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        margin-top: 15px;
+        margin-left: 10px;
+        width: 99%;
+        border-bottom: 1px solid white;
+        text-align: center;
+        background: rgb(2, 1, 75);
+    }
+
+    .transacton-data p{
+        color: white;
+    }

@@ -1,0 +1,100 @@
+.spin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
+.spin-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-shadow: 0px 0px 10px gold, 0px 0px 20px red;
+}
+
+.wheel-container {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  margin-bottom: 20px;
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 6px solid gold;
+  position: relative;
+  transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+  background: conic-gradient(
+    #ff416c 0deg 51.43deg,
+    #ff4b2b 51.43deg 102.86deg,
+    #ff7f50 102.86deg 154.29deg,
+    #ffd700 154.29deg 205.72deg,
+    #32cd32 205.72deg 257.15deg,
+    #1e90ff 257.15deg 308.58deg,
+    #8a2be2 308.58deg 360deg
+  );
+}
+
+.wheel-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0px 0px 5px black;
+}
+
+.pointer {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 30px;
+  color: yellow;
+  text-shadow: 0px 0px 10px black;
+}
+
+.spin-btn {
+  padding: 12px 30px;
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+  transition: all 0.3s;
+  box-shadow: 0px 4px 15px rgba(255, 65, 108, 0.6);
+}
+
+.spin-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 6px 20px rgba(255, 65, 108, 0.9);
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  color: gold;
+  text-shadow: 0px 0px 10px red, 0px 0px 15px yellow;
+}
+
+
+.contentBox {
+  max-height: 500px; /* height adjust kar sakte ho */
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.contentBox::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

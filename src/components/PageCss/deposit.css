@@ -1,0 +1,287 @@
+/* Google Font Integration */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Basic body style */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #0f0f1a;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container for Deposit */
+.deposit-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f1a, #1c1c2e);
+}
+
+/* Card style */
+.deposit-card {
+  background: #1b1b2a;
+  padding: 30px;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 900px;
+  color: #fff;
+  box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.7);
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+/* Header style */
+.deposit-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #ffb400;
+  text-align: center;
+}
+
+/* 🔥 UPI Title (Scan to Pay via UPI) */
+.upi-title {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin: 25px 0 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #ffb400, #ff6600);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Tabs style */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.tabs button {
+  background: transparent;
+  border: 1px solid #ffb400;
+  color: #ffb400;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tabs button.active,
+.tabs button:hover {
+  background: #ffb400;
+  color: #1b1b2a;
+  transform: translateY(-2px);
+}
+
+/* Subtitle style */
+.deposit-subtitle {
+  font-size: 16px;
+  margin-bottom: 25px;
+  color: #ccc;
+  text-align: center;
+}
+
+/* Form inputs style */
+.deposit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.deposit-form input {
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  outline: none;
+  background: #2a2a40;
+  color: #fff;
+}
+
+/* Custom select */
+.custom-select {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select div {
+  padding: 14px;
+  background: #2a2a40;
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.custom-select .options {
+  position: absolute;
+  top: 105%;
+  left: 0;
+  width: 100%;
+  background: #1b1b2a;
+  border-radius: 8px;
+  display: none;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.4);
+}
+
+.custom-select .options.active {
+  display: block;
+}
+
+.custom-select .option {
+  padding: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.custom-select .option:hover {
+  background: #ff7e5f;
+  color: white;
+}
+
+/* Button style */
+.deposit-btn {
+  padding: 14px;
+  background: linear-gradient(45deg, #ffb400, #ff6600);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.deposit-btn:hover {
+  background: linear-gradient(45deg, #ff6600, #ffb400);
+  transform: scale(1.03);
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+/* Copy UPI Button */
+.copy-upi-btn {
+  background: #ffb400;
+  border: none;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  color: #1b1b2a;
+}
+
+.copy-upi-btn:hover {
+  background: #ff6600;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Deposit Summary */
+.deposit-summary {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+  gap: 20px;
+}
+
+.deposit-summary h3 {
+  background: #2a2a40;
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffb400;
+  flex: 1;
+  text-align: center;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.5);
+}
+
+/* Transaction History */
+.deposit-history {
+  margin-top: 35px;
+  overflow-x: auto;
+  display: block;
+  width: 100%;
+}
+
+.deposit-history h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffb400;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.deposit-history table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #2a2a40;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.deposit-history th,
+.deposit-history td {
+  padding: 14px 16px;
+  font-size: 14px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+
+.deposit-history th {
+  background: linear-gradient(90deg, #ffb400, #ff6600);
+  color: #1b1b2a;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.deposit-history tr:hover td {
+  background: rgba(255, 180, 0, 0.1);
+  transition: background 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .deposit-card {
+    padding: 20px;
+  }
+
+  .deposit-summary {
+    flex-direction: column;
+  }
+
+  .deposit-summary h3 {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .deposit-history table {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .deposit-btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .copy-upi-btn {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+}
