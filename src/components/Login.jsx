@@ -16,7 +16,8 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // ✅ from .env
+      const res = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -43,15 +44,33 @@ const Login = () => {
         <p className="login-subtitle">Login to start spinning and winning real cash!</p>
 
         <form onSubmit={handleSubmit} className="login-form">
-          <input type="email" name="email" placeholder="📧 Enter your email" value={formData.email} onChange={handleChange} required />
-          <input type="password" name="password" placeholder="🔒 Enter your password" value={formData.password} onChange={handleChange} required />
-          <button type="submit" className="login-btn">Login</button>
+          <input
+            type="email"
+            name="email"
+            placeholder="📧 Enter your email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="🔒 Enter your password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit" className="login-btn">
+            Login
+          </button>
         </form>
 
         <div className="login-footer">
           <p>
             Don't have an account?{" "}
-            <span onClick={() => navigate("/signup")} className="signup-link">Signup</span>
+            <span onClick={() => navigate("/signup")} className="signup-link">
+              Signup
+            </span>
           </p>
         </div>
       </div>
