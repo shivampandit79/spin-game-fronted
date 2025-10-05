@@ -22,10 +22,11 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000";
+    // ✅ Use environment variable for API base URL
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     try {
-      const res = await fetch(`${apiUrl}/api/auth/createuser`, {
+      const res = await fetch(`${API_BASE_URL}/auth/createuser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,7 +44,7 @@ const Signup = () => {
         alert(data.errors || "Signup failed ❌");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Signup Error:", error);
       alert("Signup failed ❌");
     }
   };
