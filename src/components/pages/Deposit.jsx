@@ -176,7 +176,7 @@ const Deposit = () => {
 
         <p className="deposit-subtitle">
           {tab === "deposit"
-            ? "Add money to keep spinning and winning!"
+            ? "Add money to keep betting and winning!"
             : "Withdraw your winnings instantly!"}
         </p>
 

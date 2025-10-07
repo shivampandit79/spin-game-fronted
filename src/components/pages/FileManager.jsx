@@ -56,7 +56,7 @@ export default function FileManager() {
             <tr>
               <th>Rank</th>
               <th>Player</th>
-              <th>Spins</th>
+              <th>Betting</th>
               <th>Winnings</th>
             </tr>
           </thead>

@@ -49,7 +49,7 @@ export default function User({ refreshHistoryFlag }) {
         <div className="contentBox">
           <h2>Bet History</h2>
           {history.length === 0 ? (
-            <p style={{ textAlign: "center", color: "#ccc" }}>No spin history available.</p>
+            <p style={{ textAlign: "center", color: "#ccc" }}>No bet history available.</p>
           ) : (
             <table className="spinTable">
               <thead>
