@@ -15,6 +15,8 @@ const Signup = () => {
     gender: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false); // ✅ to track button activity
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -22,7 +24,11 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ✅ Use environment variable for API base URL
+    // Agar pehle se submitting ho rahi hai to return kar jao
+    if (isSubmitting) return;
+
+    setIsSubmitting(true); // ✅ deactivate button
+
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
     try {
@@ -46,6 +52,8 @@ const Signup = () => {
     } catch (error) {
       console.error("Signup Error:", error);
       alert("Signup failed ❌");
+    } finally {
+      setIsSubmitting(false); // ✅ reactivate button after response
     }
   };
 
@@ -74,7 +82,12 @@ const Signup = () => {
             <option value="Other">⚧ Other</option>
           </select>
 
-          <button type="submit" className="signup-btn">Signup</button>
+          <button
+            type="submit"
+            className={`signup-btn ${isSubmitting ? "btn-inactive" : ""}`} // ✅ CSS class
+          >
+            {isSubmitting ? "Please Wait..." : "Signup"}
+          </button>
         </form>
 
         <div className="signup-footer">

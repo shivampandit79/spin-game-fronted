@@ -95,3 +95,10 @@
 .gender-select option {
   color: black;
 }
+
+
+.btn-inactive {
+  pointer-events: none; /* Prevent click */
+  opacity: 0.6; /* Slightly faded look */
+  cursor: not-allowed;
+}
