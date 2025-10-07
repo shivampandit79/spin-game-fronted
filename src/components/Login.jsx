@@ -29,19 +29,19 @@ const Login = () => {
         login(data.authToken); // Save token
         navigate("/dashboard");
       } else {
-        alert(data.message || "Login failed ❌");
+        alert(data.message || "Login failed");
       }
     } catch (error) {
       console.error("Login Error:", error);
-      alert("Login failed ❌");
+      alert("Login failed");
     }
   };
 
   return (
     <div className="login-container">
       <div className="login-card">
-        <h1 className="login-title">🎰 Spin & Win</h1>
-        <p className="login-subtitle">Login to start spinning and winning real cash!</p>
+        <h1 className="login-title">🎰 Bet & Win</h1>
+        <p className="login-subtitle">Login to start Betting and winning real cash!</p>
 
         <form onSubmit={handleSubmit} className="login-form">
           <input

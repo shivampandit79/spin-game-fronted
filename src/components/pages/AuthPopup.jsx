@@ -8,8 +8,8 @@ export default function AuthPopup({ onClose }) {
   return (
     <div className="auth-popup-overlay">
       <div className="auth-popup">
-        <h2>🎰 Welcome to Spin & Win</h2>
-        <p>Login or Signup to play & win real cash</p>
+        <h2>🎰 Welcome to betting & Win</h2>
+        <p>Login or Signup to Bet & win real cash</p>
 
         <div className="auth-buttons">
           <button className="login-btn" onClick={() => navigate("/login")}>

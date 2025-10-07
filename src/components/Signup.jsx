@@ -60,8 +60,8 @@ const Signup = () => {
   return (
     <div className="signup-container">
       <div className="signup-card">
-        <h1 className="signup-title">🎰 Join Spin & Win</h1>
-        <p className="signup-subtitle">Sign up to play & win real cash every spin!</p>
+        <h1 className="signup-title">🎰 Join Betting & Win</h1>
+        <p className="signup-subtitle">Sign up to play & win real cash every betting!</p>
 
         <form onSubmit={handleSubmit} className="signup-form">
           <input type="text" name="name" placeholder="📝 Name" onChange={handleChange} required />
