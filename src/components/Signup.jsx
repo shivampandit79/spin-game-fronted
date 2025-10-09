@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import "../components/PageCss/signup.css";
+import axios from "axios";
 
 const Signup = () => {
   const { login } = useContext(AuthContext);
@@ -15,28 +16,72 @@ const Signup = () => {
     gender: "",
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false); // ✅ to track button activity
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [warnings, setWarnings] = useState({ mobile: "", email: "" });
+
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+  let debounceTimeout;
+  const debounce = (func, delay) => {
+    return (...args) => {
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(() => func(...args), delay);
+    };
+  };
+
+  const checkMobileExists = async (mobile) => {
+    if (mobile.length < 10) {
+      setWarnings((prev) => ({ ...prev, mobile: "" }));
+      return;
+    }
+    try {
+      const res = await axios.post(`${API_BASE_URL}/auth/check-mobile`, { mobile });
+      setWarnings((prev) => ({
+        ...prev,
+        mobile: res.data.exists ? "⚠ Mobile already registered" : "",
+      }));
+    } catch (err) {
+      setWarnings((prev) => ({ ...prev, mobile: "⚠ Error checking mobile" }));
+    }
+  };
+
+  const checkEmailExists = async (email) => {
+    if (!email.includes("@")) {
+      setWarnings((prev) => ({ ...prev, email: "" }));
+      return;
+    }
+    try {
+      const res = await axios.post(`${API_BASE_URL}/auth/check-email`, { email });
+      setWarnings((prev) => ({
+        ...prev,
+        email: res.data.exists ? "⚠ Email already registered" : "",
+      }));
+    } catch (err) {
+      setWarnings((prev) => ({ ...prev, email: "⚠ Error checking email" }));
+    }
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    if (e.target.name === "mobile") {
+      debounce(() => checkMobileExists(e.target.value), 500)();
+    }
+    if (e.target.name === "email") {
+      debounce(() => checkEmailExists(e.target.value), 500)();
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting || warnings.mobile || warnings.email) return;
 
-    // Agar pehle se submitting ho rahi hai to return kar jao
-    if (isSubmitting) return;
-
-    setIsSubmitting(true); // ✅ deactivate button
-
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    setIsSubmitting(true);
 
     try {
       const res = await fetch(`${API_BASE_URL}/auth/createuser`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
@@ -47,13 +92,13 @@ const Signup = () => {
         alert("Signup Successful ✅");
         navigate("/dashboard");
       } else {
-        alert(data.errors || "Signup failed ❌");
+        alert(data.message || "Signup failed ❌");
       }
     } catch (error) {
       console.error("Signup Error:", error);
       alert("Signup failed ❌");
     } finally {
-      setIsSubmitting(false); // ✅ reactivate button after response
+      setIsSubmitting(false);
     }
   };
 
@@ -64,10 +109,39 @@ const Signup = () => {
         <p className="signup-subtitle">Sign up to play & win real cash every betting!</p>
 
         <form onSubmit={handleSubmit} className="signup-form">
-          <input type="text" name="name" placeholder="📝 Name" onChange={handleChange} required />
-          <input type="email" name="email" placeholder="📧 Email" onChange={handleChange} required />
-          <input type="password" name="password" placeholder="🔒 Password" onChange={handleChange} required />
-          <input type="text" name="mobile" placeholder="📱 Mobile" onChange={handleChange} required />
+          <input
+            type="text"
+            name="name"
+            placeholder="📝 Name"
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="email"
+            name="email"
+            placeholder="📧 Email"
+            onChange={handleChange}
+            required
+          />
+          {warnings.email && <p style={{ color: "red", fontSize: "14px" }}>{warnings.email}</p>}
+
+          <input
+            type="password"
+            name="password"
+            placeholder="🔒 Password"
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="text"
+            name="mobile"
+            placeholder="📱 Mobile"
+            onChange={handleChange}
+            required
+          />
+          {warnings.mobile && <p style={{ color: "red", fontSize: "14px" }}>{warnings.mobile}</p>}
 
           <select
             name="gender"
@@ -84,7 +158,8 @@ const Signup = () => {
 
           <button
             type="submit"
-            className={`signup-btn ${isSubmitting ? "btn-inactive" : ""}`} // ✅ CSS class
+            className={`signup-btn ${isSubmitting ? "btn-inactive" : ""}`}
+            disabled={isSubmitting || warnings.mobile || warnings.email}
           >
             {isSubmitting ? "Please Wait..." : "Signup"}
           </button>
