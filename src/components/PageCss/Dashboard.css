@@ -23,42 +23,6 @@
   display: none;
 }
 
-.title .centerContent .topsection {
-  height: 30px;
-  width: 100%;
-  align-items: center;
-  text-align: center;
-  justify-content: space-between;
-  align-items: center;
-  justify-content: center;
-}
-
-.title .centerContent .topsection .icon {
-  justify-content: space-between;
-  align-items: center;
-  margin: auto;
-  padding: 5px;
-  display: flex;
-  flex-direction: row;
-}
-
-.title .centerContent .topsection .icon .walleteIcon {
-  min-width: 40px;
-  background: red;
-  border-radius: 5px;
-  padding: 2px 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.walleteIcon span {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
-  text-align: center;
-}
-
 .secondSection {
   align-items: center;
   margin: auto;
@@ -116,6 +80,15 @@
   border-radius: 25px;
 }
 
+.spinButton button {
+  color: black;
+  font-weight: 600;
+  font-size: 22px;
+  cursor: pointer;
+  animation: pulse 1.5s infinite; /* PLAY NOW animation */
+}
+
+/* ===== Spin Container ===== */
 .spinContainer {
   height: 250px;
   width: 250px;
@@ -154,7 +127,6 @@
   transform-origin: center;
 }
 
-/* Har text ko slice ke center me rotate karna */
 .spinContainer .one { transform: rotate(22.5deg); }
 .spinContainer .two { transform: rotate(67.5deg); }
 .spinContainer .three { transform: rotate(112.5deg); }
@@ -179,12 +151,6 @@
   position: absolute;
   margin-top: -230px;
   clip-path: polygon(100% 0, 50% 100%, 0 0);
-}
-
-.spinButton button {
-  color: black;
-  font-weight: 600;
-  font-size: 22px;
 }
 
 /* ===== POPUP STYLE ===== */
@@ -224,35 +190,7 @@
   cursor: pointer;
 }
 
-/* 🆕 Random Winner Card */
-.randomWinnerCard {
-  background: linear-gradient(90deg, #ff9800, #ff5722);
-  color: white;
-  padding: 8px 15px;
-  border-radius: 10px;
-  margin: 10px auto;
-  font-weight: bold;
-  text-align: center;
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-.randomWinnerCard p {
-  margin: 0;
-  font-size: 16px;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 🆕 Random Winner Card (slide) */
+/* ===== Random Winner Card ===== */
 .randomWinnerCard {
   background: #222;
   color: #fff;
@@ -262,53 +200,22 @@
   font-weight: 500;
   font-size: 15px;
   animation: slideInOut 1s linear forwards;
+  margin: 10px auto;
+  text-align: center;
 }
 
 @keyframes slideInOut {
-  0% {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  20% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  80% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
+  0% { opacity: 0; transform: translateX(100%); }
+  20% { opacity: 1; transform: translateX(0); }
+  80% { opacity: 1; transform: translateX(0); }
+  100% { opacity: 0; transform: translateX(-100%); }
 }
 
 .randomWinnerCard p {
   margin: 0;
 }
 
-
-.multiplier-container {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.multiplier-display {
-  font-size: 48px;
-  font-weight: bold;
-  color: yellow;
-  background: rgba(0,0,0,0.2);
-  padding: 15px 30px;
-  border-radius: 10px;
-  display: inline-block;
-  min-width: 120px;
-  animation: bounce 0.5s ease infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
+/* ===== Multiplier Display ===== */
 .multiplier-container {
   display: flex;
   flex-direction: column;
@@ -316,45 +223,55 @@
   margin-top: 20px;
 }
 
-.multiplier-container h2 {
-  font-size: 20px;
-  color: #fff;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-}
-
 .multiplier-display {
-  font-size: 36px;
+  font-size: 24px; /* BET NOW chhota */
   font-weight: bold;
   color: #fff;
-  padding: 20px 40px;
-  border-radius: 15px;
-  background: linear-gradient(135deg, #ff4d4d, #ff9900);
-  box-shadow: 0 0 20px rgba(255, 77, 77, 0.8), 0 0 40px rgba(255, 153, 0, 0.6);
-  animation: pulse 1.5s infinite;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-}
-
-/* Pulse Animation */
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 20px rgba(255, 77, 77, 0.8), 0 0 40px rgba(255, 153, 0, 0.6);
-  }
-  50% {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255, 77, 77, 1), 0 0 50px rgba(255, 153, 0, 0.8);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 20px rgba(255, 77, 77, 0.8), 0 0 40px rgba(255, 153, 0, 0.6);
-  }
-}
-
-/* BET NOW Special Style */
-.multiplier-display.bet-now {
+  padding: 10px 20px;
+  border-radius: 10px;
   background: linear-gradient(135deg, #4caf50, #81c784);
-  box-shadow: 0 0 20px rgba(76, 175, 80, 0.8), 0 0 40px rgba(129, 199, 132, 0.6);
-  color: #fff;
+  box-shadow: none; /* animation hata */
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+/* ===== PLAY NOW Pulse Animation ===== */
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 10px rgba(255,77,77,0.8),0 0 20px rgba(255,153,0,0.6); }
+  50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(255,77,77,1),0 0 30px rgba(255,153,0,0.8); }
+  100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,77,77,0.8),0 0 20px rgba(255,153,0,0.6); }
+}
+
+/* ===== Recent Spins Table (Scroll + Hide Header) ===== */
+.spin-records-container {
+  margin-top: 20px;
+  background: rgba(0,0,0,0.2);
+  padding: 10px;
+  border-radius: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.spin-records-container::-webkit-scrollbar {
+  display: none;
+}
+
+.spin-records-container table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+
+.spin-records-container th {
+  display: none; /* Hide table header */
+}
+
+.spin-records-container td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.spin-records-container tr:hover {
+  background: rgba(255,255,255,0.05);
 }

@@ -7,7 +7,6 @@ import BetPopup from "./BetPopup.jsx";
 import NewWinPopup from "./NewWinPopup.jsx";
 import { useNavigate } from "react-router-dom";
 
-// 📌 Environment variable for API base URL
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function Dashboard() {
@@ -24,6 +23,8 @@ export default function Dashboard() {
   const [isSpinning, setIsSpinning] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
+  const [spinRecords, setSpinRecords] = useState([]);
+
   const multiplierOptions = ["1X", "2X", "3X", "5X", "7X", "10X", "15X"];
 
   const fetchBalance = async () => {
@@ -37,7 +38,8 @@ export default function Dashboard() {
         },
       });
       const data = await res.json();
-      if (data.success && typeof data.balance === "number") setBalance(data.balance);
+      if (data.success && typeof data.balance === "number")
+        setBalance(data.balance);
     } catch (err) {
       console.error(err);
     }
@@ -48,9 +50,7 @@ export default function Dashboard() {
   }, [authToken]);
 
   const spinWheel = () => {
-
-      if (buttonDisabled) return; // ✅ Agar already click ho chuka hai to ignore
-
+    if (buttonDisabled) return;
 
     if (!authToken) {
       setShowAuthPopup(true);
@@ -60,7 +60,7 @@ export default function Dashboard() {
       navigate("/deposit");
       return;
     }
-      setButtonDisabled(true);  // ✅ Yaha turant disable kar diya
+    setButtonDisabled(true);
     setShowBetPopup(true);
   };
 
@@ -95,11 +95,10 @@ export default function Dashboard() {
           clearInterval(spinInterval);
           setMultiplier(data.multiplier);
           setWinAmount(data.winAmount);
-          setBalance(data.walletAfterSpin);
+          setBalance(data.walletBalance);
           setShowWinPopup(true);
           setIsSpinning(false);
           setButtonDisabled(false);
-
         }, 3000);
       } else {
         clearInterval(spinInterval);
@@ -116,19 +115,96 @@ export default function Dashboard() {
     }
   };
 
+  // Generate random spin records every 5 seconds
+  useEffect(() => {
+    const generateSpinRecords = () => {
+      const names = ["Alex", "John", "Sara", "Mia", "Ryan", "Lily", "Mark"];
+      const records = Array.from({ length: 5 }).map(() => {
+        const bet = Math.floor(Math.random() * 800) + 200; // > 200
+        const multiplierValue = Math.floor(Math.random() * 10) + 5; // 5x+
+        return {
+          userName: names[Math.floor(Math.random() * names.length)],
+          betAmount: bet,
+          winAmount: bet * multiplierValue,
+        };
+      });
+      setSpinRecords(records);
+    };
+
+    generateSpinRecords();
+    const interval = setInterval(generateSpinRecords, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="title">
+    <div className="title extended-title">
       <div className="centerContent">
-        <div className="topsection" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexDirection: "column", gap: "10px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center" }}>
+        <div
+          className="topsection"
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexDirection: "column",
+            gap: "10px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+              alignItems: "center",
+            }}
+          >
             <div className="icon"></div>
             {authToken && (
-              <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-                <div className="wallet-box" style={{ display: "flex", alignItems: "center", background: "#f5f5f5", padding: "8px 12px", borderRadius: "8px", fontWeight: "bold", color: "#000" }}>
-                  <IoWallet style={{ marginRight: "6px", fontSize: "20px", color: "#4caf50" }} />
-                  <span style={{ color: "#000" }}>₹{balance ? balance.toFixed(2) : "0.00"}</span>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "15px",
+                }}
+              >
+                <div
+                  className="wallet-box"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    background: "#f5f5f5",
+                    padding: "8px 12px",
+                    borderRadius: "8px",
+                    fontWeight: "bold",
+                    color: "#000",
+                  }}
+                >
+                  <IoWallet
+                    style={{
+                      marginRight: "6px",
+                      fontSize: "20px",
+                      color: "#4caf50",
+                    }}
+                  />
+                  <span style={{ color: "#000" }}>
+                    ₹{balance ? balance.toFixed(2) : "0.00"}
+                  </span>
                 </div>
-                <button disabled={buttonDisabled} onClick={logout} style={{ background: "#ff4d4d", border: "none", padding: "8px 12px", borderRadius: "6px", color: "#fff", cursor: "pointer", fontWeight: "bold" }}>Logout</button>
+                <button
+                  disabled={buttonDisabled}
+                  onClick={logout}
+                  style={{
+                    background: "#ff4d4d",
+                    border: "none",
+                    padding: "8px 12px",
+                    borderRadius: "6px",
+                    color: "#fff",
+                    cursor: "pointer",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Logout
+                </button>
               </div>
             )}
           </div>
@@ -150,15 +226,57 @@ export default function Dashboard() {
             </div>
 
             <div className="spinButton">
-              <button disabled={buttonDisabled} onClick={spinWheel}>PLAY NOW</button>
+              <button disabled={buttonDisabled} onClick={spinWheel}>
+                PLAY NOW
+              </button>
+            </div>
+
+            {/* 🆕 Scrollable Recent Spins */}
+            <div className="spin-records-container">
+              <h3 style={{ color: "#fff", textAlign: "center" }}>
+                Recent Spins
+              </h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>User Name</th>
+                    <th>Bet Amount</th>
+                    <th>Win Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {spinRecords.map((record, idx) => (
+                    <tr key={idx}>
+                      <td>{record.userName}</td>
+                      <td>₹{record.betAmount.toLocaleString()}</td>
+                      <td>₹{record.winAmount.toLocaleString()}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
 
-      {showAuthPopup && <AuthPopup onClose={() => setShowAuthPopup(false)} />}
-      {showBetPopup && <BetPopup balance={balance} onClose={() => setShowBetPopup(false)} onConfirm={handleBetConfirm} />}
-      {showWinPopup && <NewWinPopup multiplier={multiplier} betAmount={betAmount} winAmount={winAmount} onClose={() => setShowWinPopup(false)} />}
+      {showAuthPopup && (
+        <AuthPopup onClose={() => setShowAuthPopup(false)} />
+      )}
+      {showBetPopup && (
+        <BetPopup
+          balance={balance}
+          onClose={() => setShowBetPopup(false)}
+          onConfirm={handleBetConfirm}
+        />
+      )}
+      {showWinPopup && (
+        <NewWinPopup
+          multiplier={multiplier}
+          betAmount={betAmount}
+          winAmount={winAmount}
+          onClose={() => setShowWinPopup(false)}
+        />
+      )}
     </div>
   );
 }
