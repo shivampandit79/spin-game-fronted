@@ -19,16 +19,16 @@ const Signup = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [warnings, setWarnings] = useState({ mobile: "", email: "" });
+  const [referralCode, setReferralCode] = useState("");
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-  // ✅ Referral ID from URL
-  const [referralId, setReferralId] = useState(null);
+  // ✅ Get referral from URL
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const ref = searchParams.get("ref");
-    if (ref) setReferralId(ref);
-  }, [location.search]);
+    const params = new URLSearchParams(location.search);
+    const ref = params.get("ref");
+    if (ref) setReferralCode(ref);
+  }, [location]);
 
   let debounceTimeout;
   const debounce = (func, delay) => {
@@ -72,8 +72,13 @@ const Signup = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    if (e.target.name === "mobile") debounce(() => checkMobileExists(e.target.value), 500)();
-    if (e.target.name === "email") debounce(() => checkEmailExists(e.target.value), 500)();
+
+    if (e.target.name === "mobile") {
+      debounce(() => checkMobileExists(e.target.value), 500)();
+    }
+    if (e.target.name === "email") {
+      debounce(() => checkEmailExists(e.target.value), 500)();
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -83,14 +88,13 @@ const Signup = () => {
     setIsSubmitting(true);
 
     try {
-      // ✅ Attach referralId automatically
-      const bodyData = { ...formData };
-      if (referralId) bodyData.ref = referralId;
+      const payload = { ...formData };
+      if (referralCode) payload.ref = referralCode;
 
       const res = await fetch(`${API_BASE_URL}/auth/createuser`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bodyData),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
@@ -117,29 +121,68 @@ const Signup = () => {
         <p className="signup-subtitle">Sign up to play & win real cash every betting!</p>
 
         <form onSubmit={handleSubmit} className="signup-form">
-          <input type="text" name="name" placeholder="📝 Name" onChange={handleChange} required />
-          <input type="email" name="email" placeholder="📧 Email" onChange={handleChange} required />
+          <input
+            type="text"
+            name="name"
+            placeholder="📝 Name"
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="email"
+            name="email"
+            placeholder="📧 Email"
+            onChange={handleChange}
+            required
+          />
           {warnings.email && <p style={{ color: "red", fontSize: "14px" }}>{warnings.email}</p>}
 
-          <input type="password" name="password" placeholder="🔒 Password" onChange={handleChange} required />
-          <input type="text" name="mobile" placeholder="📱 Mobile" onChange={handleChange} required />
+          <input
+            type="password"
+            name="password"
+            placeholder="🔒 Password"
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="text"
+            name="mobile"
+            placeholder="📱 Mobile"
+            onChange={handleChange}
+            required
+          />
           {warnings.mobile && <p style={{ color: "red", fontSize: "14px" }}>{warnings.mobile}</p>}
 
-          <select name="gender" value={formData.gender} onChange={handleChange} className="gender-select" required>
+          <select
+            name="gender"
+            value={formData.gender}
+            onChange={handleChange}
+            className="gender-select"
+            required
+          >
             <option value="">⚧ Select Gender</option>
             <option value="Male">♂ Male</option>
             <option value="Female">♀ Female</option>
             <option value="Other">⚧ Other</option>
           </select>
 
-          <button type="submit" className={`signup-btn ${isSubmitting ? "btn-inactive" : ""}`} disabled={isSubmitting || warnings.mobile || warnings.email}>
+          <button
+            type="submit"
+            className={`signup-btn ${isSubmitting ? "btn-inactive" : ""}`}
+            disabled={isSubmitting || warnings.mobile || warnings.email}
+          >
             {isSubmitting ? "Please Wait..." : "Signup"}
           </button>
         </form>
 
         <div className="signup-footer">
           <p>
-            Already have an account? <span onClick={() => navigate("/login")} className="login-link">Login</span>
+            Already have an account?{" "}
+            <span onClick={() => navigate("/login")} className="login-link">
+              Login
+            </span>
           </p>
         </div>
       </div>
