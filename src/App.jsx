@@ -6,6 +6,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Dashboard from "./components/pages/Dashboard";
 import Users from "./components/pages/Users";
+import Analytics from "./components/pages/Analytics";
 import FileManager from "./components/pages/FileManager";
 import Order from "./components/pages/Order";
 import Saved from "./components/pages/Saved";
@@ -17,6 +18,7 @@ import "typeface-roboto";
 import Deposit from "./components/pages/Deposit";
 import { AuthProvider } from "./context/AuthContext";
 import ReferEarn from "./components/pages/ReferEarn";
+import Shoot form "./components/pages/Shoot.jsx";
 
 function App() {
   // 🔹 Add-to-Home (Install App) button logic — only added below
@@ -56,6 +58,7 @@ function App() {
                 {/* <Route path="/order" element={<Order />} /> */}
                 <Route path="/saved" element={<Saved />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/shoot" element={<Shoot/>} />
               </Routes>
 
               {/* 🔹 Install App Button (Optional) */}
