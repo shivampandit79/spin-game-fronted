@@ -47,10 +47,10 @@ export default function ReferEarn() {
 
         setTotalReferrals(data.user.totalReferrals || 0);
 
-        // 🔹 Count active users (example: users who deposited)
+        // 🔹 Count active users (walletbalance > 0)
         let activeCount = 0;
         if (data.user.referrals && Array.isArray(data.user.referrals)) {
-          activeCount = data.user.referrals.filter(u => u.isActive).length;
+          activeCount = data.user.referrals.filter(u => u.walletbalance > 0).length;
         }
         setActiveUsers(activeCount);
       } else {

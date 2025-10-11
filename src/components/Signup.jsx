@@ -92,7 +92,7 @@ const Signup = () => {
 
     try {
       const payload = { ...formData };
-      if (referralCode) payload.ref = referralCode; // Send referral to backend
+      if (referralCode) payload.ref = referralCode; // 🔹 send referral
 
       const res = await fetch(`${API_BASE_URL}/auth/createuser`, {
         method: "POST",
