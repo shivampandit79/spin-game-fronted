@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../../components/PageCss/Analytics.css";
 
 export default function Analytics() {
-  const baseUrl = window.location.origin; // 👈 current domain automatically detect karega
-  const userId = "12345"; // future me ye login user se dynamically aayega
-  const [referralLink] = useState(`${baseUrl}/referral/${userId}`);
+  const baseUrl = window.location.origin; // automatically detect current domain
+  const userId = "12345"; // dynamically replace with logged-in user later
+  const [referralLink] = useState(`${baseUrl}/?ref=${userId}`); // ✅ FIXED
 
   const [totalReferrals, setTotalReferrals] = useState(5);
   const [activeUsers, setActiveUsers] = useState(3);
@@ -17,13 +17,11 @@ export default function Analytics() {
   return (
     <div className="referral-section">
       <div className="referral-container">
-        {/* HEADER */}
         <div className="referral-header">
           <h1>Refer & Earn 🎰</h1>
           <p>Invite friends and earn rewards when they deposit!</p>
         </div>
 
-        {/* REFERRAL LINK */}
         <div className="referral-link-box">
           <span>Your Referral Link</span>
           <div className="referral-input">
@@ -32,7 +30,6 @@ export default function Analytics() {
           </div>
         </div>
 
-        {/* DATA CARDS */}
         <div className="referral-cards">
           <div className="card">
             <span>Total Referrals</span>
