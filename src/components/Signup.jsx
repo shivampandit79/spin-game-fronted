@@ -26,8 +26,11 @@ const Signup = () => {
   // ✅ Get referral from URL
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const ref = params.get("ref");
-    if (ref) setReferralCode(ref);
+    const ref = params.get("ref"); // Base64 code
+    if (ref) {
+      console.log("Referral code from URL:", ref); // Debug
+      setReferralCode(ref);
+    }
   }, [location]);
 
   let debounceTimeout;
@@ -89,7 +92,7 @@ const Signup = () => {
 
     try {
       const payload = { ...formData };
-      if (referralCode) payload.ref = referralCode;
+      if (referralCode) payload.ref = referralCode; // Send referral to backend
 
       const res = await fetch(`${API_BASE_URL}/auth/createuser`, {
         method: "POST",
