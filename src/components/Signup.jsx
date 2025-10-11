@@ -23,13 +23,18 @@ const Signup = () => {
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-  // ✅ Get referral from URL
+  // ✅ Global referral capture from URL
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const ref = params.get("ref"); // Base64 code
     if (ref) {
-      console.log("Referral code from URL:", ref); // Debug
+      console.log("Referral code from URL:", ref); 
+      localStorage.setItem("referralCode", ref); // save globally
       setReferralCode(ref);
+    } else {
+      // If URL has no ref, try localStorage
+      const storedRef = localStorage.getItem("referralCode");
+      if (storedRef) setReferralCode(storedRef);
     }
   }, [location]);
 
@@ -92,7 +97,8 @@ const Signup = () => {
 
     try {
       const payload = { ...formData };
-      if (referralCode) payload.ref = referralCode; // 🔹 send referral
+      const storedRef = localStorage.getItem("referralCode");
+      if (storedRef) payload.ref = storedRef; // Send referral to backend
 
       const res = await fetch(`${API_BASE_URL}/auth/createuser`, {
         method: "POST",
