@@ -17,29 +17,38 @@ export default defineConfig({
         theme_color: '#000000',
         background_color: '#ffffff',
         display: 'standalone',
-        start_url: '.', // relative start URL for PWA
-        scope: '.',     // ensures all routes fall under PWA
+        start_url: '/',
         icons: [
-          { src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png' },
-          { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png' },
-          { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
-        ],
-      },
-      workbox: {
-        cleanupOutdatedCaches: true,      // automatically clean old caches
-        navigateFallback: '/index.html',  // fixes blank home page in installed PWA
-      },
-    }),
+          {
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable'
+          }
+        ]
+      }
+    })
   ],
   build: {
     rollupOptions: {
-      input: '/index.html', // entry point
-    },
+      input: '/index.html'
+    }
   },
-  base: './', // relative base for installed PWA
+  base: '/',
   server: {
+    // ✅ Disable the HMR overlay for URI malformed / decodeURI issues
     hmr: {
-      overlay: false, // disables HMR overlay for URI decode errors
-    },
-  },
+      overlay: false
+    }
+  }
 })

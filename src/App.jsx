@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
-
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
@@ -48,7 +47,7 @@ function App() {
             <Sidebar />
             <div className="content">
               <Routes>
-                <Route path="/" element={<Dashboard />} />
+                <Route path="/" element={<Navigate to="/dashboard" />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
