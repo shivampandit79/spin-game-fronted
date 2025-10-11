@@ -17,38 +17,29 @@ export default defineConfig({
         theme_color: '#000000',
         background_color: '#ffffff',
         display: 'standalone',
-        start_url: '/',
+        start_url: '.', // relative start URL for PWA
+        scope: '.',     // ensures all routes fall under PWA
         icons: [
-          {
-            src: 'pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable'
-          }
-        ]
-      }
-    })
+          { src: 'pwa-192x192.png', sizes: '192x192', type: 'image/png' },
+          { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png' },
+          { src: 'pwa-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
+        ],
+      },
+      workbox: {
+        cleanupOutdatedCaches: true,      // automatically clean old caches
+        navigateFallback: '/index.html',  // fixes blank home page in installed PWA
+      },
+    }),
   ],
   build: {
     rollupOptions: {
-      input: '/index.html'
-    }
+      input: '/index.html', // entry point
+    },
   },
-  base: '/',
+  base: './', // relative base for installed PWA
   server: {
-    // ✅ Disable the HMR overlay for URI malformed / decodeURI issues
     hmr: {
-      overlay: false
-    }
-  }
+      overlay: false, // disables HMR overlay for URI decode errors
+    },
+  },
 })
