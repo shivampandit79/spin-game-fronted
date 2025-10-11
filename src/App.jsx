@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { HashRouter, BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
+
 
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
