@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # Ignore Shoot.jsx file
-src/components/Shoot.jsx
+src/components/pages/Shoot.jsx
