@@ -34,8 +34,8 @@ const routes = [
     icon: <FaInbox />,
   },
   {
-    path: "/analytics",
-    name: "Analytics",
+    path: "/refer",
+    name: "ReferEarn",
     icon: <FaChartBar />,
   },
   {
