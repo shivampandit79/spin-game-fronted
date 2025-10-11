@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import "../../components/PageCss/Analytics.css";
 
 export default function Analytics() {
-  const [referralLink] = useState("http://spinking.com/referral/12345");
+  const baseUrl = window.location.origin; // 👈 current domain automatically detect karega
+  const userId = "12345"; // future me ye login user se dynamically aayega
+  const [referralLink] = useState(`${baseUrl}/referral/${userId}`);
+
   const [totalReferrals, setTotalReferrals] = useState(5);
   const [activeUsers, setActiveUsers] = useState(3);
 
